@@ -5,6 +5,17 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    # Patch/minor bumps are low-risk and get their own PR each, grouped to
+    # cut down on noise. Majors (react 18->19, tailwind 3->4, etc.) are
+    # deliberately routed to a separate group with NO auto-merge intent —
+    # they need a human to actually read the changelog and test, not a
+    # weekly PR pile-up that mostly gets ignored.
+    groups:
+      patch-and-minor:
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
