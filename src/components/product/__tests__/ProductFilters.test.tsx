@@ -65,10 +65,21 @@ describe('ProductFilters', () => {
     expect(props.onInStockOnlyChange).toHaveBeenCalledWith(true);
   });
 
-  it('reports a minimum rating selection', async () => {
+  it('reports a minimum rating selection via the custom dropdown', async () => {
     const user = userEvent.setup();
     const props = renderFilters();
-    await user.selectOptions(screen.getByLabelText('Minimum rating'), '4');
+    // The rating control is now a themed button + listbox (see Dropdown.tsx),
+    // not a native <select> — open it, then click the desired option.
+    await user.click(screen.getByLabelText('Minimum rating'));
+    await user.click(screen.getByRole('option', { name: '4★ & up' }));
     expect(props.onMinRatingChange).toHaveBeenCalledWith(4);
+  });
+
+  it('reports a sort selection via the custom dropdown', async () => {
+    const user = userEvent.setup();
+    const props = renderFilters();
+    await user.click(screen.getByLabelText('Sort products'));
+    await user.click(screen.getByRole('option', { name: 'Top rated' }));
+    expect(props.onSortChange).toHaveBeenCalledWith('rating');
   });
 });

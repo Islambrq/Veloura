@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Dropdown } from '@/components/ui/Dropdown';
 import type { Category } from '@/types';
 
 interface ProductFiltersProps {
@@ -15,6 +16,20 @@ interface ProductFiltersProps {
   inStockOnly: boolean;
   onInStockOnlyChange: (value: boolean) => void;
 }
+
+const RATING_OPTIONS = [
+  { value: '', label: 'Any rating' },
+  { value: '4', label: '4★ & up' },
+  { value: '3', label: '3★ & up' },
+  { value: '2', label: '2★ & up' },
+];
+
+const SORT_OPTIONS = [
+  { value: 'newest', label: 'Newest' },
+  { value: 'price_asc', label: 'Price: low to high' },
+  { value: 'price_desc', label: 'Price: high to low' },
+  { value: 'rating', label: 'Top rated' },
+];
 
 export function ProductFilters({
   categories,
@@ -102,17 +117,13 @@ export function ProductFilters({
             )}
           </div>
 
-          <select
-            value={minRating ?? ''}
-            onChange={(e) => onMinRatingChange(e.target.value ? Number(e.target.value) : null)}
-            className="input py-1.5 w-auto text-sm"
-            aria-label="Minimum rating"
-          >
-            <option value="">Any rating</option>
-            <option value="4">4★ &amp; up</option>
-            <option value="3">3★ &amp; up</option>
-            <option value="2">2★ &amp; up</option>
-          </select>
+          <Dropdown
+            value={minRating != null ? String(minRating) : ''}
+            options={RATING_OPTIONS}
+            onChange={(v) => onMinRatingChange(v ? Number(v) : null)}
+            ariaLabel="Minimum rating"
+            className="w-36"
+          />
 
           <label className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full border border-line cursor-pointer">
             <input
@@ -124,17 +135,13 @@ export function ProductFilters({
           </label>
         </div>
 
-        <select
+        <Dropdown
           value={sort}
-          onChange={(e) => onSortChange(e.target.value)}
-          className="input py-1.5 w-auto text-sm"
-          aria-label="Sort products"
-        >
-          <option value="newest">Newest</option>
-          <option value="price_asc">Price: low to high</option>
-          <option value="price_desc">Price: high to low</option>
-          <option value="rating">Top rated</option>
-        </select>
+          options={SORT_OPTIONS}
+          onChange={onSortChange}
+          ariaLabel="Sort products"
+          className="w-44"
+        />
       </div>
     </div>
   );
