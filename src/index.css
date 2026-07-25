@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-porcelain text-ink font-sans;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-cobalt;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Signature element: a price rendered like a physical retail tag, with a
+     punched hole at the left edge. Used consistently on every product
+     price across the storefront. */
+  .price-tag {
+    @apply relative inline-flex items-center gap-1.5 rounded-sm bg-ink text-porcelain
+           font-mono text-sm pl-5 pr-2.5 py-1 shadow-tag;
+  }
+  .price-tag::before {
+    content: '';
+    @apply absolute left-1.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-porcelain;
+  }
+  .price-tag--sale {
+    @apply bg-danger;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded font-medium
+           transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-porcelain px-5 py-2.5 hover:bg-ink-soft;
+  }
+  .btn-secondary {
+    @apply btn bg-transparent text-ink border border-ink px-5 py-2.5 hover:bg-ink hover:text-porcelain;
+  }
+  .btn-accent {
+    @apply btn bg-cobalt text-white px-5 py-2.5 hover:bg-cobalt-dark;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-ink px-3 py-2 hover:bg-porcelain-dim;
+  }
+
+  .input {
+    @apply w-full rounded border border-line bg-white px-3.5 py-2.5 text-sm text-ink
+           placeholder:text-ink/40 focus:border-cobalt focus:outline-none;
+  }
+  .label {
+    @apply block text-xs font-medium uppercase tracking-wide text-ink/60 mb-1.5;
+  }
+
+  .card {
+    @apply bg-white rounded-md border border-line shadow-card;
+  }
+}
