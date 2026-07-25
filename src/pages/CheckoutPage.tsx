@@ -83,15 +83,20 @@ export function CheckoutPage() {
         })
         .single();
 
+      // The Supabase client isn't given a generated Database schema type, so
+      // PostgREST RPC responses come back as an untyped `{}` — cast to the
+      // shape we know preview_order_totals() returns (see migration 015).
+      const row = data as Totals | null;
+
       if (!active) return;
       setIsPreviewLoading(false);
-      if (!error && data) {
+      if (!error && row) {
         setTotals({
-          subtotal: Number(data.subtotal),
-          discount: Number(data.discount),
-          tax: Number(data.tax),
-          shipping: Number(data.shipping),
-          total: Number(data.total),
+          subtotal: Number(row.subtotal),
+          discount: Number(row.discount),
+          tax: Number(row.tax),
+          shipping: Number(row.shipping),
+          total: Number(row.total),
         });
       }
     }, 400);
