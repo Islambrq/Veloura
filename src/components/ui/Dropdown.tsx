@@ -57,24 +57,25 @@ export function Dropdown({ value, options, onChange, ariaLabel, className = '' }
       </button>
 
       {isOpen && (
-        <ul role="listbox" className="absolute z-20 mt-1 min-w-full w-max card overflow-hidden py-1">
+        <div role="listbox" className="absolute z-20 mt-1 min-w-full w-max card overflow-hidden py-1">
           {options.map((option) => (
-            <li key={option.value} role="option" aria-selected={option.value === value}>
-              <button
-                type="button"
-                onClick={() => {
-                  onChange(option.value);
-                  setIsOpen(false);
-                }}
-                className={`w-full text-left px-3 py-2 text-sm whitespace-nowrap ${
-                  option.value === value ? 'bg-ink text-porcelain' : 'hover:bg-porcelain-dim'
-                }`}
-              >
-                {option.label}
-              </button>
-            </li>
+            <button
+              key={option.value}
+              type="button"
+              role="option"
+              aria-selected={option.value === value}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+              className={`w-full text-left px-3 py-2 text-sm whitespace-nowrap ${
+                option.value === value ? 'bg-ink text-porcelain' : 'hover:bg-porcelain-dim'
+              }`}
+            >
+              {option.label}
+            </button>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

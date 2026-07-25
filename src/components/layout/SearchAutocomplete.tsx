@@ -95,28 +95,29 @@ export function SearchAutocomplete() {
       </form>
 
       {isOpen && suggestions.length > 0 && (
-        <ul role="listbox" className="absolute z-20 mt-1 w-full card overflow-hidden py-1">
+        <div role="listbox" className="absolute z-20 mt-1 w-full card overflow-hidden py-1">
           {suggestions.map((product, i) => (
-            <li key={product.id} role="option" aria-selected={i === activeIndex}>
-              <button
-                type="button"
-                onClick={() => goToProduct(product)}
-                onMouseEnter={() => setActiveIndex(i)}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm ${
-                  i === activeIndex ? 'bg-porcelain-dim' : ''
-                }`}
-              >
-                <div className="w-9 h-9 rounded bg-porcelain-dim overflow-hidden shrink-0">
-                  {product.product_images?.[0]?.url && (
-                    <img src={product.product_images[0].url} alt="" className="w-full h-full object-cover" />
-                  )}
-                </div>
-                <span className="flex-1 truncate">{product.name}</span>
-                <span className="font-mono text-xs text-ink/50">{formatPrice(product.price, product.currency)}</span>
-              </button>
-            </li>
+            <button
+              key={product.id}
+              type="button"
+              role="option"
+              aria-selected={i === activeIndex}
+              onClick={() => goToProduct(product)}
+              onMouseEnter={() => setActiveIndex(i)}
+              className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm ${
+                i === activeIndex ? 'bg-porcelain-dim' : ''
+              }`}
+            >
+              <div className="w-9 h-9 rounded bg-porcelain-dim overflow-hidden shrink-0">
+                {product.product_images?.[0]?.url && (
+                  <img src={product.product_images[0].url} alt="" className="w-full h-full object-cover" />
+                )}
+              </div>
+              <span className="flex-1 truncate">{product.name}</span>
+              <span className="font-mono text-xs text-ink/50">{formatPrice(product.price, product.currency)}</span>
+            </button>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
