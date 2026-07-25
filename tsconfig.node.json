@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
-    "noEmit": true,
+    "outDir": "./.tsbuild-node",
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
