@@ -1,3 +1,7 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+# Run this from the root of your Veloura repo (the folder with package.json).
+cat > "eslint.config.js" << 'VELOURA_EOF'
 import js from '@eslint/js'
 import tsPlugin from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
@@ -28,5 +32,8 @@ export default [
       'no-undef': 'off',
     },
   },
-  { ignores: ['dist/**', 'node_modules/**', '.tsbuild-node/**', 'coverage/**', 'playwright-report/**', 'test-results/**'] },
+  { ignores: ['dist/**', 'node_modules/**'] },
 ]
+VELOURA_EOF
+
+echo "eslint.config.js updated. Now run: npm run lint"
