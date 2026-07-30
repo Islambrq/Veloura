@@ -1,9 +1,9 @@
 export function Footer() {
   return (
     <footer className="border-t border-line mt-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row justify-between gap-6 text-sm text-ink/60">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-16 md:pb-10 flex flex-col sm:flex-row justify-between gap-6 text-sm text-ink/60">
         <div>
-          <div className="font-display text-lg text-ink mb-1">Fernweh</div>
+          <div className="font-display text-lg text-ink mb-1">Veloura</div>
           <p>Considered goods, built to last.</p>
         </div>
         <div className="flex gap-8">

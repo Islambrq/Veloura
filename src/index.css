@@ -69,4 +69,39 @@
   .card {
     @apply bg-white rounded-md border border-line shadow-card;
   }
+
+  /* Marketplace product badges — small stamped labels over product imagery. */
+  .badge {
+    @apply absolute text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded-sm leading-none;
+  }
+  .badge-discount {
+    @apply badge bg-danger text-white;
+  }
+  .badge-new {
+    @apply badge bg-cobalt text-white;
+  }
+  .badge-out {
+    @apply badge bg-ink/80 text-porcelain;
+  }
+
+  /* Fixed mobile tab bar; hidden at desktop widths where the header nav takes over. */
+  .bottom-nav {
+    @apply fixed bottom-0 inset-x-0 z-40 bg-white border-t border-line shadow-nav
+           pb-safe-b md:hidden;
+  }
+  .bottom-nav-item {
+    @apply flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[11px] font-medium text-ink/50;
+  }
+  .bottom-nav-item--active {
+    @apply text-ink;
+  }
+
+  /* Horizontally scrollable pill/tab rows (category tabs, circular icon rail) with no visible scrollbar. */
+  .scroll-row {
+    @apply flex gap-2 overflow-x-auto;
+    scrollbar-width: none;
+  }
+  .scroll-row::-webkit-scrollbar {
+    display: none;
+  }
 }

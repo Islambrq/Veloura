@@ -35,10 +35,17 @@ export default {
         DEFAULT: '4px',
         md: '6px',
         lg: '10px',
+        xl: '16px',
+        '2xl': '22px',
       },
       boxShadow: {
         tag: '0 1px 0 0 rgba(20,23,28,0.06)',
         card: '0 1px 2px rgba(20,23,28,0.04), 0 8px 24px -12px rgba(20,23,28,0.12)',
+        pop: '0 2px 4px rgba(20,23,28,0.05), 0 14px 28px -10px rgba(20,23,28,0.18)',
+        nav: '0 -1px 0 0 rgba(20,23,28,0.06), 0 -8px 20px -12px rgba(20,23,28,0.1)',
+      },
+      spacing: {
+        'safe-b': 'env(safe-area-inset-bottom, 0px)',
       },
     },
   },

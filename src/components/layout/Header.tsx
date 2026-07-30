@@ -1,21 +1,25 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
+import { useCategories } from '@/hooks/useCategories';
 import { SearchAutocomplete } from './SearchAutocomplete';
 
 export function Header() {
   const { user, signOut } = useAuth();
   const { itemCount } = useCart();
   const { isAdmin } = useIsAdmin();
+  const { categories } = useCategories();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const activeCategory = searchParams.get('category');
 
   return (
     <header className="sticky top-0 z-40 bg-porcelain/95 backdrop-blur border-b border-line">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to="/" className="font-display text-2xl tracking-tight shrink-0">
-          Fernweh
+          Veloura
         </Link>
 
         <nav className="hidden md:flex items-center gap-5 text-sm font-medium">
@@ -115,6 +119,36 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {categories.length > 0 && (
+        <div className="md:hidden border-t border-line/70 px-4">
+          <nav className="scroll-row py-2.5" aria-label="Categories">
+            <Link
+              to="/products"
+              className={`shrink-0 px-1 pb-1.5 text-sm border-b-2 transition-colors ${
+                !activeCategory
+                  ? 'border-ink text-ink font-semibold'
+                  : 'border-transparent text-ink/55 font-medium'
+              }`}
+            >
+              All
+            </Link>
+            {categories.map((c) => (
+              <Link
+                key={c.id}
+                to={`/products?category=${c.slug}`}
+                className={`shrink-0 px-1 pb-1.5 text-sm border-b-2 transition-colors whitespace-nowrap ${
+                  activeCategory === c.slug
+                    ? 'border-ink text-ink font-semibold'
+                    : 'border-transparent text-ink/55 font-medium'
+                }`}
+              >
+                {c.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
