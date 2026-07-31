@@ -1,0 +1,27 @@
+{
+  "packageId": "io.github.islambrq.veloura",
+  "host": "islambrq.github.io",
+  "name": "Veloura",
+  "launcherName": "Veloura",
+  "display": "standalone",
+  "themeColor": "#14171C",
+  "navigationColor": "#14171C",
+  "backgroundColor": "#EEEAE2",
+  "startUrl": "/Veloura/",
+  "iconUrl": "https://islambrq.github.io/Veloura/icons/icon-512.png",
+  "maskableIconUrl": "https://islambrq.github.io/Veloura/icons/icon-512-maskable.png",
+  "webManifestUrl": "https://islambrq.github.io/Veloura/manifest.webmanifest",
+  "shortcuts": [],
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "veloura"
+  },
+  "appVersion": "1",
+  "appVersionCode": 1,
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": { "enabled": false },
+  "enableNotifications": false,
+  "isChromeOSOnly": false,
+  "orientation": "portrait"
+}
