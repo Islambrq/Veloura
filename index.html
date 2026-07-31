@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fernweh — considered goods</title>
+    <title>Veloura — considered goods</title>
     <meta name="description" content="A curated marketplace for goods built to last." />
+    <link rel="manifest" href="/Veloura/manifest.webmanifest" />
+    <meta name="theme-color" content="#14171C" />
+    <link rel="icon" href="/Veloura/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/Veloura/icons/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,5 +16,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Veloura/sw.js').catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>
