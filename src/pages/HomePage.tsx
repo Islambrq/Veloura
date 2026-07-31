@@ -2,40 +2,55 @@ import { Link } from 'react-router-dom';
 import { useProducts } from '@/hooks/useProducts';
 import { useCategories } from '@/hooks/useCategories';
 import { ProductGrid } from '@/components/product/ProductGrid';
+import { HeroCarousel, type HeroSlide } from '@/components/layout/HeroCarousel';
+
+const heroSlides: HeroSlide[] = [
+  {
+    eyebrow: 'New arrivals, every season',
+    title: 'Goods worth keeping, not replacing.',
+    subtitle: 'A considered catalog of audio, bags, home, and outdoor gear.',
+    ctaLabel: 'Shop the catalog',
+    ctaTo: '/products',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200',
+  },
+  {
+    eyebrow: 'Top rated this week',
+    title: 'Chosen by people who kept them.',
+    subtitle: 'Real ratings from real orders — no filler, no fast fashion.',
+    ctaLabel: 'See top rated',
+    ctaTo: '/products?sort=rating',
+    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200',
+  },
+];
 
 export function HomePage() {
   const { products: newArrivals, isLoading: loadingNew } = useProducts({ sort: 'newest', pageSize: 8 });
   const { products: topRated, isLoading: loadingTop } = useProducts({ sort: 'rating', pageSize: 8 });
   const { categories } = useCategories();
 
+  const collections = [
+    { label: 'New In', to: '/products?sort=newest', image: heroSlides[0].image },
+    { label: 'Top Rated', to: '/products?sort=rating', image: heroSlides[1].image },
+    ...categories.slice(0, 3).map((c) => ({
+      label: c.name,
+      to: `/products?category=${c.slug}`,
+      image: c.image_url ?? heroSlides[0].image,
+    })),
+  ];
+
   return (
     <div>
-      <section className="border-b border-line bg-porcelain">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-24 grid sm:grid-cols-2 gap-6 sm:gap-10 items-center">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-ink/50 mb-3 sm:mb-4">
-              New arrivals, every season
-            </p>
-            <h1 className="font-display text-3xl sm:text-5xl leading-[1.05] mb-4 sm:mb-5">
-              Goods worth keeping,
-              <br />
-              not replacing.
-            </h1>
-            <p className="text-ink/70 max-w-md mb-5 sm:mb-7 text-sm sm:text-base">
-              A small, considered catalog of audio, bags, home, and outdoor
-              gear — chosen for materials and construction, not trend cycles.
-            </p>
-            <Link to="/products" className="btn-primary rounded-full px-6">
-              Shop the catalog
+      <HeroCarousel slides={heroSlides} />
+
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-2">
+        <div className="scroll-row px-0.5">
+          {collections.map((c) => (
+            <Link key={c.label} to={c.to} className="collection-card">
+              <img src={c.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
+              <span className="collection-card__label">{c.label}</span>
             </Link>
-          </div>
-          <div className="aspect-[16/10] sm:aspect-[4/3] rounded-2xl overflow-hidden bg-porcelain-dim">
-            <img
-              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200"
-              alt="A considered still life of everyday carry goods"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          ))}
         </div>
       </section>
 

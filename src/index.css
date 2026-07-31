@@ -38,7 +38,7 @@
     @apply absolute left-1.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-porcelain;
   }
   .price-tag--sale {
-    @apply bg-danger;
+    @apply bg-flame;
   }
 
   .btn {
@@ -75,7 +75,7 @@
     @apply absolute text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded-sm leading-none;
   }
   .badge-discount {
-    @apply badge bg-danger text-white;
+    @apply badge bg-flame text-white;
   }
   .badge-new {
     @apply badge bg-cobalt text-white;
@@ -103,5 +103,31 @@
   }
   .scroll-row::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Horizontally scroll-snapping hero carousel; slides are full-bleed children. */
+  .carousel {
+    @apply flex overflow-x-auto snap-x snap-mandatory;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-slide {
+    @apply snap-center shrink-0 w-full;
+  }
+  .carousel-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-white/50 transition-all duration-200;
+  }
+  .carousel-dot--active {
+    @apply w-4 bg-white;
+  }
+
+  /* Dark-overlay image card used in the featured-collections rail. */
+  .collection-card {
+    @apply relative shrink-0 w-32 sm:w-40 aspect-[3/4] rounded-xl overflow-hidden bg-ink;
+  }
+  .collection-card__label {
+    @apply absolute inset-x-0 bottom-0 p-3 text-white font-medium text-sm;
   }
 }

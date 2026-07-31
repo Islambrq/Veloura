@@ -13,9 +13,13 @@ export default {
           dim: '#E3DED2',
         },
         cobalt: {
-          DEFAULT: '#2C5CE0',
-          dark: '#1E43AD',
-          light: '#EAF0FD',
+          DEFAULT: '#8A2846',
+          dark: '#6B1D36',
+          light: '#F7E9EE',
+        },
+        flame: {
+          DEFAULT: '#E8432E',
+          dark: '#C13320',
         },
         gold: {
           DEFAULT: '#B8935B',
